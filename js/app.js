@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function initializeMap() {
         // "L" is the Leaflet object, which is available because we included the Leaflet library in the HTML file
-        var map = L.map('map').setView([40.34597, -74.65210], 19); // Set the center point and zoom level
+        var map = L.map('map').setView([40.34265, -74.65815], 19); // Set the center point and zoom level
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 21,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -27,5 +27,17 @@ document.addEventListener("DOMContentLoaded", function() {
             fillOpacity: 0.3,
             radius: 10
         }).addTo(map);
+
+        var polygon = L.polygon([
+            [40.34275, -74.65739],
+            [40.34256, -74.65811],
+            [40.34297, -74.65832],
+            [40.34317, -74.65759]
+        ], {
+            color: '#aaddff',
+            fillColor: '#aaddff',
+            fillOpacity: 0.3,
+        }).addTo(map);
+        polygon.bindPopup("Hockey tends to happen here 🏒");
     }
 });
