@@ -19,5 +19,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         var marker = L.marker([40.34597, -74.65210]).addTo(map);
         marker.bindPopup("<b>Fine Hall Vis Lab</b><br>Where we are right now!<br>(...more or less...)");
+    
+        // This could be useful for uncertainty visualization
+        var circle = L.circle([40.34597, -74.65210], {
+            color: 'orange',
+            fillColor: 'orange',
+            fillOpacity: 0.3,
+            radius: 10
+        }).addTo(map);
     }
 });
