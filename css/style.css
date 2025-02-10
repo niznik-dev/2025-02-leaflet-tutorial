@@ -1,10 +1,33 @@
 body {
-    background-color: #224466;
+    background-color: #5588bb;
+}
+
+#bodyHeading {
+    margin: auto;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+#clearMarkers {
+    background-color: #ffaaaa;
+    border: 3px solid #880000;
+    border-radius: 10px;
+    color: #880000;
+    font-size: 16px;
+    padding: 10px;
+}
+
+#clearMarkers:hover {
+    box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2), 0 12px 12px 0 rgba(0,0,0,0.19);
+}
+
+#clearMarkers:active {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19);
 }
 
 h1 {
     color: #eeeeee;
-    text-align: center;;
 }
 
 #map {

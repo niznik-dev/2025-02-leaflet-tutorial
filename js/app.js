@@ -53,5 +53,15 @@ document.addEventListener("DOMContentLoaded", function() {
             new_marker.bindPopup("You clicked here! " + lat_fmt + " " + lng_fmt);
             clickMarkers.push(new_marker);
         });
+
+        // You could do the same thing with jQuery or another framework if you prefer
+        document.getElementById("clearMarkers").addEventListener("click", function() {
+            for (var i = 0; i < clickMarkers.length; i++) {
+                // Remove each marker from the map
+                map.removeLayer(clickMarkers[i]);
+            }
+            // Reset the array of markers
+            clickMarkers = [];
+        });
     }
 });
