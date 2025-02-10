@@ -1,5 +1,7 @@
 // I'm using vanilla JS here, but if you want to use another framework you can do an equivalent thing with it
 document.addEventListener("DOMContentLoaded", function() {
+    var clickMarkers = [];
+    
     const mapElement = document.getElementById("map");
 
     if (mapElement) {
@@ -39,5 +41,17 @@ document.addEventListener("DOMContentLoaded", function() {
             fillOpacity: 0.3,
         }).addTo(map);
         polygon.bindPopup("Hockey tends to happen here 🏒");
+
+        map.on('click', function(e) {
+            var lat_fmt = e.latlng.lat.toFixed(5) + " N";
+            var lng_fmt = e.latlng.lng.toFixed(5) + " W";
+
+            // alert("What a cool spot! That's " + e.latlng);
+            // alert("What a cool spot! That's " + e.latlng.lat + " N " + Math.abs(e.latlng.lng) + " W!");
+            // alert("What a cool spot! That's " + lat_fmt + " " + lng_fmt);
+            var new_marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+            new_marker.bindPopup("You clicked here! " + lat_fmt + " " + lng_fmt);
+            clickMarkers.push(new_marker);
+        });
     }
 });
