@@ -11,10 +11,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function initializeMap() {
         // "L" is the Leaflet object, which is available because we included the Leaflet library in the HTML file
-        var map = L.map('map').setView([40.34592, -74.65223], 19); // Set the center point and zoom level
+        var map = L.map('map').setView([40.34597, -74.65210], 19); // Set the center point and zoom level
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 21,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
+
+        var marker = L.marker([40.34597, -74.65210]).addTo(map);
+        marker.bindPopup("<b>Fine Hall Vis Lab</b><br>Where we are right now!<br>(...more or less...)");
     }
 });
