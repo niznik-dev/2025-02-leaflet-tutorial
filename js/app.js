@@ -40,6 +40,28 @@ document.addEventListener("DOMContentLoaded", function() {
         }).addTo(map);
         polygon.bindPopup("Hockey tends to happen here 🏒");
 
+        // Load GeoJSON data from a URL
+        fetch('https://gist.githubusercontent.com/rajinwonderland/80b3ac9c7dc75337594fb5e711e461a7/raw/6cf57ddbe377b652345a5a44bdf0c420693ef32d/stadiums.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    onEachFeature: function(feature, layer) {
+                        layer.bindPopup(feature.properties.name1);
+                    },
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 10,
+                            color: "brown",
+                            fillColor: "brown",
+                            weight: 2,
+                            opacity: 0.5,
+                            fillOpacity: 0.5,
+                        });
+                    },
+                }).addTo(map);
+            })
+            .catch(error => console.error("Error loading GeoJSON:", error));
+
         var userMarkers = L.layerGroup().addTo(map);
 
         map.on('click', function(e) {
