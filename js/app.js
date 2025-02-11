@@ -1,7 +1,5 @@
 // I'm using vanilla JS here, but if you want to use another framework you can do an equivalent thing with it
-document.addEventListener("DOMContentLoaded", function() {
-    var clickMarkers = [];
-    
+document.addEventListener("DOMContentLoaded", function() {    
     const mapElement = document.getElementById("map");
 
     if (mapElement) {
@@ -42,6 +40,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }).addTo(map);
         polygon.bindPopup("Hockey tends to happen here 🏒");
 
+        var userMarkers = L.layerGroup().addTo(map);
+
         map.on('click', function(e) {
             var lat_fmt = e.latlng.lat.toFixed(5) + " N";
             var lng_fmt = e.latlng.lng.toFixed(5) + " W";
@@ -51,17 +51,24 @@ document.addEventListener("DOMContentLoaded", function() {
             // alert("What a cool spot! That's " + lat_fmt + " " + lng_fmt);
             var new_marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
             new_marker.bindPopup("You clicked here! " + lat_fmt + " " + lng_fmt);
-            clickMarkers.push(new_marker);
+            userMarkers.addLayer(new_marker);
+        });
+
+        document.getElementById("toggleMarkers").addEventListener("click", function() {
+            if (map.hasLayer(userMarkers)) {
+                map.removeLayer(userMarkers);
+            } else {
+                map.addLayer(userMarkers);
+            }
         });
 
         // You could do the same thing with jQuery or another framework if you prefer
         document.getElementById("clearMarkers").addEventListener("click", function() {
-            for (var i = 0; i < clickMarkers.length; i++) {
-                // Remove each marker from the map
-                map.removeLayer(clickMarkers[i]);
+            if (!map.hasLayer(userMarkers)) {
+                alert('Please show the markers before clearing them!');
+                return;
             }
-            // Reset the array of markers
-            clickMarkers = [];
+            userMarkers.clearLayers();
         });
     }
 });
